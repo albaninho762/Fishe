@@ -1,0 +1,51 @@
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+document.body.appendChild(renderer.domElement);
+
+const light = new THREE.DirectionalLight(0xffffff, 1);
+light.position.set(5, 5, 5).normalize();
+scene.add(light);
+
+const ambientLight = new THREE.AmbientLight(0x404040);
+scene.add(ambientLight);
+
+const loader = new GLTFLoader();
+let fish;
+
+loader.load('fish_model.glb', (gltf) => {
+    fish = gltf.scene;
+    scene.add(fish);
+    fish.position.set(0, 0, 0);
+});
+
+camera.position.z = 5;
+const controls = new OrbitControls(camera, renderer.domElement);
+
+function animateFish() {
+    if (fish) {
+        fish.rotation.y += 0.02;
+        fish.position.x = Math.sin(Date.now() * 0.002) * 2;
+        fish.position.y = Math.sin(Date.now() * 0.003) * 0.5;
+    }
+}
+
+function animate() {
+    requestAnimationFrame(animate);
+    animateFish();
+    controls.update();
+    renderer.render(scene, camera);
+}
+
+animate();
+
+window.addEventListener('resize', () => {
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+});
