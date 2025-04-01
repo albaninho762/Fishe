@@ -1,42 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peixe Animado</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            background-color: #87CEEB;
-        }
-        .fish {
-            position: absolute;
-            width: 100px;
-            height: 50px;
-            background: orange;
-            border-radius: 50px;
-            animation: swim 4s infinite linear;
-        }
-        .fish::before {
-            content: '';
-            position: absolute;
-            right: -20px;
-            top: 10px;
-            width: 20px;
-            height: 30px;
-            background: orange;
-            clip-path: polygon(100% 50%, 0% 0%, 0% 100%);
-        }
-        @keyframes swim {
-            0% { transform: translateX(-100px) translateY(20px) rotateY(0); }
-            50% { transform: translateX(100vw) translateY(-20px) rotateY(0); }
-            51% { transform: translateX(100vw) translateY(-20px) rotateY(180deg); }
-            100% { transform: translateX(-100px) translateY(20px) rotateY(180deg); }
-        }
-    </style>
-</head>
-<body>
-    <div class="fish"></div>
-</body>
-</html>
+html,body{
+
+  border: 0;
+
+  padding: 0;
+
+  margin: 0;
+
+  overflow: hidden;
+
+  background: #000;
+
+}
+
+
+
+.info{
+
+z-index:999;
+
+position : absolute;
+
+left:0;
+
+top:0;
+
+padding:10px;
+
+color:#fff;
+
+background: rgba(0,0,0,0.5);
+
+text-transform:capitalize;
+
+}
